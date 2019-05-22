@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/*Nav */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #1f1f3d;
+}
+
+h1 {
+  color: white;
+  font-size: 34px;
+}
+
+.search-input {
+  
+}
+
+/*Main*/
+
+main {
+  display: grid;
+  grid-template-areas: 
+  'task cards cards'
+  'task cards cards';
+  grid-template-columns: 25% 75%;
+}
+
+/*To-do Input Form*/
+
+.to-do-input {
+  background-color: #587a8a;
+  height: 100vh;
+  grid-area: task;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 20px 10px 7px;
+  font-weight: 700;
+  color: #c7d3d8;
+}
+
+input {
+  margin: 0px 10px 13px;
+  height: 4em;
+}
+
+button {
+  margin: 20px 8px;
+  height: 3em;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #1f1f3d;
+  color: white;
+  border-color: #1f1f3d;
+  border-radius: 3px;
+}
+
+.make-task-btn {
+   margin-bottom: -2px;
+}
+
+.clear-all-btn {
+  margin-bottom: 31px;
+}
+
+.filter-by-btn {
+  margin-top: 31px;
+}
+
+.line {
+  border: 1px solid #3c6577;
+}
+
+/*To-do Cards*/
+
+.to-do-list {
+  background-color: #f3f6f7;
+  height: 100vh;
+  grid-area: cards;
+}
+
+.task-card {
+	width: 30%;
+	background-color: #f3f6f7;
+	border: 2px solid #c7d3d8;
+	margin: 24px;
+}
+
+h2 {
+  border-bottom: 2px solid #c7d3d8;
+  padding: 10px;
+}
