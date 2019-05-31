@@ -16,10 +16,28 @@ nav {
 h1 {
   color: white;
   font-size: 34px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.yellow-txt {
+   color: #ffc30c;
 }
 
 .search-input {
-  
+  height: 42px;
+  float: right;
+  width: 24em;
+  border-radius: 0 3px 3px 0;
+  border: none;
+  margin: 0;
+}
+
+.search-button {
+  height: 42px;
+  background-color: #c7d3d8;
+  padding: 7px;
+  border-radius: 3px 0 0 3px;
 }
 
 /*Main*/
@@ -32,7 +50,7 @@ main {
   grid-template-columns: 25% 75%;
 }
 
-/*To-do Input Form*/
+/*Aside Input Form*/
 
 .to-do-input {
   background-color: #587a8a;
@@ -51,6 +69,12 @@ label {
 input {
   margin: 0px 10px 13px;
   height: 4em;
+  border-radius: 3px;
+  border: 2px solid #1f1f3d;
+}
+
+#task-item {
+  
 }
 
 button {

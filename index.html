@@ -8,27 +8,29 @@
 </head>
 <body>
 	<nav>
-		<h1>CHECK YO' SELF</h1>
+		<h1>CHECK <span class="yellow-txt">YO'</span> SELF</h1>
 		<section>
-		  <img src="" class="search-button">
-		  <input type="search" placeholder="Search" class="search-input">
+		  <img src="images/search.svg" class="search-button" alt="search svg image">
+		  <input type="text" placeholder="Search" class="search-input">
 		</section>
 	</nav>
     <main>
-    	<section class="to-do-input">
+    	<aside class="to-do-input">
           <label for="task-title">Task Title</label>
-          <input type="text" name="" id="task-title"> 
+          <input type="text" id="task-title"> 
 
           <label for="task-item">Task Item</label>
-          <input type="text" name="" id="task-item"> 
-          <img src="" class="add-button">
-
+          <section>
+            <input type="text" id="task-item"> 
+            <!-- <img src="" class="add-button"> -->
+            <button class="add">+</button>
+          </section>
           <button type="submit" class="make-task-btn">Make Task List</button>
           <button type="submit" class="clear-all-btn">Clear All</button>
           <div class="line"></div>
           <button type="submit" class="filter-by-btn">Filter by Urgency</button>
     		
-    	</section>
+    	</aside>
     	<section class="to-do-list">
     		<!-- <section class="task-card">
     			<h2>Task Title</h2>
