@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 	<title>Check Yo'Self</title>
-	<link rel="stylesheet" type="text/css" href="rest.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="reset.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<nav>
-		<h1>CHECK YO' SELF</h1>
-		<section>
-		  <img src="" class="search-icon">
-		  <input type="search" placeholder="Search" class="search-input">
+		<h1>CHECK <span class="yellow-txt">YO'</span> SELF</h1>
+		<section class="search-form">
+		  <img src="images/search.svg" class="search-button" alt="search svg image">
+		  <input type="text" placeholder="Search" class="search-input">
 		</section>
 	</nav>
     <main>
-    	<section class="to-do-input">
+    	<aside class="to-do-input">
           <label for="task-title">Task Title</label>
-          <input type="text" name="" id="task-title"> 
+          <input type="text" id="task-title"> 
 
           <label for="task-item">Task Item</label>
-          <input type="text" name="" id="task-item"> 
-          <img src="" class="add-icon">
-
+          <section class="add-task-items">
+            <input type="text" id="task-item"> 
+            <img src="images/plus.svg" class="add-button" alt="Plus symbol svg"> 
+          </section>
           <button type="submit" class="make-task-btn">Make Task List</button>
           <button type="submit" class="clear-all-btn">Clear All</button>
           <div class="line"></div>
           <button type="submit" class="filter-by-btn">Filter by Urgency</button>
     		
-    	</section>
+    	</aside>
     	<section class="to-do-list">
     		<section class="task-card">
     			<h2>Task Title</h2>
-    			<section>
-    				
+    			<section class="to-do-check">
+            <img src="images/checkbox.svg" class="check-task">
+    				<p> task task task </p>
     			</section>
-                <img src="">
-                <img src="">
+          <section class="img-buttons">
+            <img src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
+            <img src="images/delete.svg" class="delete-btn" alt="Delete X button">
+          </section>
     		</section>
     	</section>
     </main>
