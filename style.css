@@ -78,15 +78,18 @@ input {
 }
 
 #task-item {
+  border-radius: 3px 0px 0px 3px;
   margin: 0px 0px 13px 10px;
-  width: 80%;
+  width: 81%;
 }
 
 .add-button {
   background-color: #1f1f3d;
-  height: 40px;
+  border-radius: 0px 3px 3px 0px;
+  height: 44px;
   padding: 5px;
-  margin-left: -4px;
+  margin-left: -5px;
+  vertical-align: middle;
 }
 
 button {
@@ -167,12 +170,14 @@ h2 {
 
 /* Media Queries */
 
-@media screen and (max-width: 1011px) {
+@media screen and (max-width: 1199px) {
 
-  /*main {
-    display: flex;
-    flex-direction: column;
-  }*/
+  #task-item {
+    width: 77%;
+  }
+}
+
+@media screen and (max-width: 1011px) {
 
   #task-item {
     width: 74%;
@@ -182,7 +187,7 @@ h2 {
 @media screen and (max-width: 865px) {
 
    #task-item {
-    width: 75%;
+    width: 69%;
   }
 }
 
@@ -208,7 +213,7 @@ h2 {
   }
 
   #task-item {
-    width: 68%;
+    width: 92%;
   }
 
   .task-card {
@@ -217,18 +222,34 @@ h2 {
   }
 }
 
-@media screen and (max-width: 670px) {
-  
-  /*nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }*/
+@media screen and (max-width: 666px) {
+ 
+  #task-item {
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 443px) {
+
+  #task-item {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 439px) {
+
+   #task-item {
+    width: 85%;
+  }
 }
 
 @media screen and (max-width: 368px) {
 
   .search-input {
-    width: 18em;
+    width: 75%;
+  }
+
+  #task-item {
+    width: 79%;
   }
 }
