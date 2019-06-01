@@ -159,13 +159,38 @@ h2 {
   height: 21px;
 }
 
-.img-buttons > img {
+.urgent > img,
+.delete > img {
   height: 26px;
   margin: 10px;
 }
 
-.delete-btn {
-  float: right;
+.urgent > p,
+.delete > p {
+  font-size: 12px;
+  margin-top: -5px;
+}
+
+.urgent,
+.delete {
+  padding: 5px;
+}
+
+.img-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.first-page-text {
+  font-size: 37px;
+  text-align: center;
+  margin: auto;
+  font-weight: 700;
+  padding: 20px;
+  color: black;
+  -webkit-text-fill-color: #ffc30c;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 /* Media Queries */
