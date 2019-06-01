@@ -13,16 +13,18 @@ var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 window.addEventListener('load', newTasksArray);
 window.addEventListener('load', loadTasksMessage);
 makeTaskBtn.addEventListener('click', saveTasksInfo);
+taskInput.addEventListener('keyup', disableBtnToggle);
+clearAllBtn.addEventListener('click', clearAllTheInputs);
 
-function saveTasksInfo(e) {
+function saveTasksInfo(e) { 
   e.preventDefault();
   var savedTasks = new toDoList(Date.now(), taskTitle.value, taskInput.value);
   arrayOfTasks.push(savedTasks);
   savedTasks.saveToStorage(arrayOfTasks);
   printTasksToCards(savedTasks);
-  // clearFieldInputs();
+  clearAllTheInputs();
   loadTasksMessage();
-}
+};
 
 function newTasksArray() {
   arrayOfTasks = arrayOfTasks.map(function(oldTasks) {
@@ -30,7 +32,7 @@ function newTasksArray() {
     printTasksToCards(newTasks);
     return newTasks;
   });
-}
+};
 
 function printTasksToCards(task) {
   var cardSection = 
@@ -52,9 +54,7 @@ function printTasksToCards(task) {
           </section>
         </section>`;
   toDoSection.insertAdjacentHTML('afterbegin', cardSection);
-
-  console.log(task.id);
-}
+};
 
 function loadTasksMessage() {
   if(arrayOfTasks.length === 0){
@@ -62,4 +62,24 @@ function loadTasksMessage() {
   } else {
     windowLoadMsg.innerText = '';
   }
+};
+
+function disableBtnToggle() {
+   disableMakeTaskBtn(makeTaskBtn);
+   disableMakeTaskBtn(clearAllBtn);
+}
+
+function disableMakeTaskBtn(button) {
+  if(taskTitle.value === '' && taskInput.value === '') {
+    button.disabled = true;
+    button.classList.add('disabled');
+  } else {
+    button.disabled = false;
+    button.classList.remove('disabled');
+  }
+};
+
+function clearAllTheInputs() {
+  taskTitle.value = '';
+  taskInput.value = '';
 }

@@ -1,5 +1,0 @@
-class todo {
-	constructor(obj) {
-      
-	}
-}

@@ -105,18 +105,26 @@ button {
 
 .make-task-btn {
    margin-bottom: -2px;
+   outline: 0;
 }
 
 .clear-all-btn {
   margin-bottom: 31px;
+  outline: 0;
 }
 
 .filter-by-btn {
   margin-top: 31px;
+  outline: 0;
 }
 
 .line {
   border: 1px solid #3c6577;
+}
+
+button:disabled {
+  background-color: #4D7393;
+  color: #1F1F3D;
 }
 
 /*To-do Cards*/
