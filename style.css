@@ -131,20 +131,18 @@ button:disabled {
 
 .to-do-list {
   background-color: #f3f6f7;
+  columns: 2 250px;
+  column-gap: 20px;
   grid-area: cards;
   height: 100vh;
-}
-
-.to-do-list {
-  /*columns: 2 50px;
-  column-gap: 1rem;*/
 }
 
 .task-card {
   background-color: #f3f6f7;
   border: 2px solid #c7d3d8;
+  break-inside: avoid;
   margin: 24px;
-  width: 30%;
+  width: 100%;
 }
 
 h2 {
