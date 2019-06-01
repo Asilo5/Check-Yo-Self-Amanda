@@ -20,14 +20,19 @@
     	<aside class="to-do-input">
           <label for="task-title">Task Title</label>
           <input type="text" id="task-title"> 
-
+          <section class="display-pre-todos">
+            <!-- <div class="pre-todos-to-print">
+              <img src="images/checkbox.svg" class="check-task">
+              <p> task task task </p>
+            </div> -->
+          </section>
           <label for="task-item">Task Item</label>
           <section class="add-task-items">
             <input type="text" id="task-item"> 
             <img src="images/plus.svg" class="add-button" alt="Plus symbol svg"> 
           </section>
-          <button type="submit" class="make-task-btn">Make Task List</button>
-          <button type="submit" class="clear-all-btn">Clear All</button>
+          <button type="submit" class="make-task-btn" disabled>Make Task List</button>
+          <button type="submit" class="clear-all-btn" disabled>Clear All</button>
           <div class="line"></div>
           <button type="submit" class="filter-by-btn">Filter by Urgency</button>
     		
