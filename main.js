@@ -1,27 +1,65 @@
 var searchBtn = document.querySelector('.search-button');
 var searchInput = document.querySelector('.search-input');
 var taskTitle = document.querySelector('#task-title');
-var taskItem = document.querySelector('#task-item');
+var taskInput = document.querySelector('#task-item');
 var addBtn = document.querySelector('.add-button');
 var makeTaskBtn= document.querySelector('.make-task-btn');
 var clearAllBtn = document.querySelector('.clear-all-btn');
 var filterByBtn = document.querySelector('.filter-by-btn');
 var toDoSection = document.querySelector('.to-do-list');
-var localStore = JSON.parse(localStorage.getItem());
+var windowLoadMsg = document.querySelector('.first-page-text');
+var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-makeTaskBtn.addEventListener('click', printCard);
+window.addEventListener('load', newTasksArray);
+window.addEventListener('load', loadTasksMessage);
+makeTaskBtn.addEventListener('click', saveTasksInfo);
 
-function printCard(e) {
+function saveTasksInfo(e) {
   e.preventDefault();
-  var theTask = document.createElement('section');
-  toDoSection.prepend(theTask);
-  theTask.innerHTML += 
-  `<section class="task-card">
-   <h2>Task Title</h2>
-    <section>
-    <p> task task task </p>
-    </section>
-     <img src="">
-     <img src="">
-    </section>` 
+  var savedTasks = new toDoList(Date.now(), taskTitle.value, taskInput.value);
+  arrayOfTasks.push(savedTasks);
+  savedTasks.saveToStorage(arrayOfTasks);
+  printTasksToCards(savedTasks);
+  // clearFieldInputs();
+  loadTasksMessage();
+}
+
+function newTasksArray() {
+  arrayOfTasks = arrayOfTasks.map(function(oldTasks) {
+    var newTasks = new toDoList(oldTasks.id, oldTasks.title, oldTasks.tasks, oldTasks.urgent);
+    printTasksToCards(newTasks);
+    return newTasks;
+  });
+}
+
+function printTasksToCards(task) {
+  var cardSection = 
+  `<section class="task-card" data-id=${task.id}>
+          <h2 class="title-printed" contenteditable = 'true'>${task.title}</h2>
+          <section class="to-do-check">
+            <img src="images/checkbox.svg" class="check-task">
+            <p class="task-printed" contenteditable = 'true'>${task.tasks}</p>
+          </section>
+          <section class="img-buttons">
+            <div class="urgent">
+              <img src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
+              <p>URGENT</p>
+           </div>
+           <div class="delete">
+              <img src="images/delete.svg" class="delete-btn" alt="Delete X button">
+              <p>DELETE</p>
+          </div>
+          </section>
+        </section>`;
+  toDoSection.insertAdjacentHTML('afterbegin', cardSection);
+
+  console.log(task.id);
+}
+
+function loadTasksMessage() {
+  if(arrayOfTasks.length === 0){
+    windowLoadMsg.innerText = `Add your to-do's first, please!`;
+  } else {
+    windowLoadMsg.innerText = '';
+  }
 }
