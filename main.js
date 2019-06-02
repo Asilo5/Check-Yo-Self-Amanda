@@ -16,6 +16,7 @@ var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 window.addEventListener('load', newTasksArray);
 window.addEventListener('load', loadTasksMessage);
 makeTaskBtn.addEventListener('click', saveTasksInfo);
+// makeTaskBtn.addEventListener('click', loopSideTasks); // 
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
@@ -23,8 +24,14 @@ ulSideContainer.addEventListener('click', delteDisplayedTask);
 
 
 function saveTasksInfo(e) { 
+  // var tasks = [];
+  // debugger;
+  // for (var i = 0; i > ulSideContainer.children.length; i++) {
+  //    tasks.push(ulSideContainer.children[i].innerText);
+  //  }
+
   e.preventDefault();
-  var savedTasks = new toDoList(Date.now(), taskTitle.value, taskInput.value);
+  var savedTasks = new toDoList(Date.now(), taskTitle.value, loopSideTasks());
   arrayOfTasks.push(savedTasks);
   savedTasks.saveToStorage(arrayOfTasks);
   printTasksToCards(savedTasks);
@@ -41,13 +48,18 @@ function newTasksArray() {
 };
 
 function printTasksToCards(task) {
+  var sideTasks = '';
+  for(var i = 0; i < task.tasks.length; i++) {
+  sideTasks += `<section class="to-do-check">
+            <img src="images/checkbox.svg" class="check-task">
+            <p class="task-printed" contenteditable = 'true'>${task.tasks[i]}</p>
+          </section>`
+        }
+
   var cardSection = 
   `<section class="task-card" data-id=${task.id}>
           <h2 class="title-printed" contenteditable = 'true'>${task.title}</h2>
-          <section class="to-do-check">
-            <img src="images/checkbox.svg" class="check-task">
-            <p class="task-printed" contenteditable = 'true'>${task.tasks}</p>
-          </section>
+          ${sideTasks}
           <section class="img-buttons">
             <div class="urgent">
               <img src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
@@ -94,9 +106,8 @@ function clearAllTheInputs() {
 function asideBulletPoints() {
   bulletPointsContainer.insertAdjacentHTML('beforeend', 
     `<li class='printed-lists'>${taskInput.value}</li>`);
-  //wipw\e value and disabel fskfjk
   taskInput.value = '';
-  
+
   if(taskTitle.value === '' && taskInput.value === '') {
     addBtn.disabled = true;
     addBtn.classList.add('disabled');
@@ -109,3 +120,24 @@ function delteDisplayedTask(e) {
     listSideContainer.remove();
   };
 }
+
+function loopSideTasks() {
+  var asideLi = document.querySelectorAll('.printed-lists');
+  var asideLiAsArray = Array.from(asideLi)
+
+  var newAsideLi = asideLiAsArray.map(function(element){
+    return element.innerText
+  })
+   return newAsideLi;
+
+}
+
+
+
+
+
+
+
+
+
+
