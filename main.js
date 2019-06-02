@@ -9,6 +9,8 @@ var filterByBtn = document.querySelector('.filter-by-btn');
 var toDoSection = document.querySelector('.to-do-list');
 var windowLoadMsg = document.querySelector('.first-page-text');
 var bulletPointsContainer = document.querySelector('.pre-todos-to-print');
+var listSideContainer = document.querySelector('.display-pre-todos');
+var ulSideContainer = document.querySelector('.pre-todos-to-print');
 var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 window.addEventListener('load', newTasksArray);
@@ -17,6 +19,8 @@ makeTaskBtn.addEventListener('click', saveTasksInfo);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
+ulSideContainer.addEventListener('click', delteDisplayedTask);
+
 
 function saveTasksInfo(e) { 
   e.preventDefault();
@@ -89,6 +93,19 @@ function clearAllTheInputs() {
 
 function asideBulletPoints() {
   bulletPointsContainer.insertAdjacentHTML('beforeend', 
-    `<li class="printed-lists">${taskInput.value}</li>`);
+    `<li class='printed-lists'>${taskInput.value}</li>`);
   //wipw\e value and disabel fskfjk
+  taskInput.value = '';
+  
+  if(taskTitle.value === '' && taskInput.value === '') {
+    addBtn.disabled = true;
+    addBtn.classList.add('disabled');
+  };
+}
+
+function delteDisplayedTask(e) {
+  var listSideContainer = document.querySelector('.printed-lists');
+   if (e.target.className === 'printed-lists') {
+    listSideContainer.remove();
+  };
 }
