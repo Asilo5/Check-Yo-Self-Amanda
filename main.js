@@ -8,6 +8,7 @@ var clearAllBtn = document.querySelector('.clear-all-btn');
 var filterByBtn = document.querySelector('.filter-by-btn');
 var toDoSection = document.querySelector('.to-do-list');
 var windowLoadMsg = document.querySelector('.first-page-text');
+var bulletPointsContainer = document.querySelector('.pre-todos-to-print');
 var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 window.addEventListener('load', newTasksArray);
@@ -15,6 +16,7 @@ window.addEventListener('load', loadTasksMessage);
 makeTaskBtn.addEventListener('click', saveTasksInfo);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
+addBtn.addEventListener('click', asideBulletPoints);
 
 function saveTasksInfo(e) { 
   e.preventDefault();
@@ -67,6 +69,7 @@ function loadTasksMessage() {
 function disableBtnToggle() {
    disableMakeTaskBtn(makeTaskBtn);
    disableMakeTaskBtn(clearAllBtn);
+   disableMakeTaskBtn(addBtn);
 }
 
 function disableMakeTaskBtn(button) {
@@ -82,4 +85,10 @@ function disableMakeTaskBtn(button) {
 function clearAllTheInputs() {
   taskTitle.value = '';
   taskInput.value = '';
+}
+
+function asideBulletPoints() {
+  bulletPointsContainer.insertAdjacentHTML('beforeend', 
+    `<li class="printed-lists">${taskInput.value}</li>`);
+  //wipw\e value and disabel fskfjk
 }

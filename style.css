@@ -75,6 +75,7 @@ input {
   border: 2px solid #1f1f3d;
   height: 4em;
   margin: 0px 13px 13px;
+  outline: 0;
 }
 
 #task-item {
@@ -127,22 +128,34 @@ button:disabled {
   color: #1F1F3D;
 }
 
+.printed-lists::before {
+  content: '';
+  display: inline-block;
+  height: 21px;
+  width: 20px;
+  background-image: url(images/delete.svg);
+  margin-right: 5px;
+  margin-left: 13px;
+  vertical-align: middle;
+}
+
 /*To-do Cards*/
 
 .to-do-list {
   background-color: #f3f6f7;
-  columns: 2 250px;
-  column-gap: 20px;
+  /*columns: 2 250px;
+  column-gap: 20px;*/
   grid-area: cards;
   height: 100vh;
+  padding: 15px;
 }
 
 .task-card {
   background-color: #f3f6f7;
   border: 2px solid #c7d3d8;
-  break-inside: avoid;
+  /*break-inside: avoid;*/
   margin: 24px;
-  width: 100%;
+ /* width: 50%;*/
 }
 
 h2 {
