@@ -15,9 +15,10 @@ class toDoList {
 
 	}
 
-	updateToDo() {
+	updateToDo(array) {
 		// Update todos title and urgency
-
+		this.urgent = !this.urgent;
+		this.saveToStorage(array);
 	}
 
 	updateTask() {
