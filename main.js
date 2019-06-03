@@ -16,7 +16,7 @@ var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 window.addEventListener('load', newTasksArray);
 window.addEventListener('load', loadTasksMessage);
 makeTaskBtn.addEventListener('click', saveTasksInfo);
-// makeTaskBtn.addEventListener('click', loopSideTasks); // 
+// toDoSection.addEventListener('click', toggleUrgent);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
@@ -24,12 +24,6 @@ ulSideContainer.addEventListener('click', delteDisplayedTask);
 
 
 function saveTasksInfo(e) { 
-  // var tasks = [];
-  // debugger;
-  // for (var i = 0; i > ulSideContainer.children.length; i++) {
-  //    tasks.push(ulSideContainer.children[i].innerText);
-  //  }
-
   e.preventDefault();
   var savedTasks = new toDoList(Date.now(), taskTitle.value, loopSideTasks());
   arrayOfTasks.push(savedTasks);
@@ -54,7 +48,13 @@ function printTasksToCards(task) {
             <img src="images/checkbox.svg" class="check-task">
             <p class="task-printed" contenteditable = 'true'>${task.tasks[i]}</p>
           </section>`
-        }
+        };
+
+    // if(task.urgent === true){
+    //   toggleUrgentInput.src = "images/urgent-active.svg";
+    // } else {
+    //   toggleUrgentInput.src = "images/urgent.svg";
+    // };
 
   var cardSection = 
   `<section class="task-card" data-id=${task.id}>
@@ -62,11 +62,11 @@ function printTasksToCards(task) {
           ${sideTasks}
           <section class="img-buttons">
             <div class="urgent">
-              <img src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
+              <input type="image" src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
               <p>URGENT</p>
            </div>
            <div class="delete">
-              <img src="images/delete.svg" class="delete-btn" alt="Delete X button">
+              <input type="image" src="images/delete.svg" class="delete-btn" alt="Delete X button">
               <p>DELETE</p>
           </div>
           </section>
@@ -123,16 +123,43 @@ function delteDisplayedTask(e) {
 
 function loopSideTasks() {
   var asideLi = document.querySelectorAll('.printed-lists');
-  var asideLiAsArray = Array.from(asideLi)
-
+  var asideLiAsArray = Array.from(asideLi);
   var newAsideLi = asideLiAsArray.map(function(element){
     return element.innerText
-  })
+  });
    return newAsideLi;
-
 }
 
+// function toggleUrgent(e) {
+//   var urgentInput = document.querySelector('.urgent-btn');
 
+//   if(e.target.className === 'urgent-btn') {
+//     var urgent = e.target.parentElement.parentElement.parentElement;
+//     console.log('urgent parent', urgent);
+//     var urgentId = urgent.dataset.id;
+//     console.log('the ID of parent', urgentId);
+
+//     var foundUrgentId = arrayOfTasks.find(function(arrayId){
+//       console.log('the arrayId', arrayId.id);
+//       console.log('the inside urgentId', parseInt(urgentId));
+//       return arrayId.id === parseInt(urgentId);
+//     });
+
+//     console.log('foundUrgentId --->', foundUrgentId);
+
+//     foundUrgentId.updateToDo(arrayOfTasks);
+
+//     var toggleUrgentInput = e.target;
+
+//     // console.log(toggleUrgent);
+    
+//     if(foundUrgentId.urgent === true){
+//       toggleUrgentInput.src = "images/urgent-active.svg";
+//     } else {
+//       toggleUrgentInput.src = "images/urgent.svg";
+//     };
+//   }
+// }
 
 
 

@@ -169,7 +169,6 @@ h2 {
 }
 
 .to-do-check {
-  border-bottom: 2px solid #c7d3d8;
   padding: 19px;
   display: flex;
 }
@@ -183,10 +182,11 @@ h2 {
   height: 21px;
 }
 
-.urgent > img,
-.delete > img {
+.urgent > input,
+.delete > input {
   height: 26px;
   margin: 10px;
+  border: 0;
 }
 
 .urgent > p,
@@ -201,6 +201,7 @@ h2 {
 }
 
 .img-buttons {
+  border-top: 2px solid #c7d3d8;
   display: flex;
   justify-content: space-between;
 }
