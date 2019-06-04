@@ -22,11 +22,12 @@ cardShown = document.querySelector('.task-card');
 
 makeTaskBtn.addEventListener('click', saveTasksInfo);
 toDoSection.addEventListener('click', toggleUrgent);
+toDoSection.addEventListener('click', deleteCard);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
 ulSideContainer.addEventListener('click', delteDisplayedTask);
-cardShown.addEventListener('click', checkedItems);
+// cardShown.addEventListener('click', checkedItems);
 
 
 function saveTasksInfo(e) { 
@@ -35,34 +36,19 @@ function saveTasksInfo(e) {
   arrayOfTasks.push(savedTasks);
   savedTasks.saveToStorage(arrayOfTasks);
   printTasksToCards(savedTasks);
-  // sideTasks(savedTasks);
   clearAllTheInputs();
   loadTasksMessage();
 };
 
 function newTasksArray() {
-  console.log("Loaded")
   arrayOfTasks = arrayOfTasks.map(function(oldTasks) {
     var newTasks = new toDoList(oldTasks.id, oldTasks.title, oldTasks.tasks, oldTasks.urgent);
     printTasksToCards(newTasks);
-    // sideTasks(newTasks);
     return newTasks;
   });
 };
 
-// function sideTasks(task) {
-//   var sideTasks = '';
-//   for(var i = 0; i < task.tasks.length; i++) {
-//   sideTasks += `<section class="to-do-check">
-//             <img src="images/checkbox.svg" class="check-task">
-//             <p class="task-printed" contenteditable = 'true'>${task.tasks[i]}</p>
-//           </section>`
-//         };
-// }
-
 function printTasksToCards(task) {
-   
-
   var sideTasks = '';
   for(var i = 0; i < task.tasks.length; i++) {
         if(task.tasks[i].isChecked === true) {
@@ -148,7 +134,6 @@ function delteDisplayedTask(e) {
 }
 
 function loopSideTasks() {
-
   var asideLi = document.querySelectorAll('.printed-lists');
   var asideLiAsArray = Array.from(asideLi);
   var newAsideLi = asideLiAsArray.map(function(element){
@@ -182,43 +167,44 @@ function toggleUrgent(e) {
 }
 
 function checkedItems(e) {
-  
-
      var indexOfTask = parseInt(e.id);
-
      var idOfTaskList = parseInt(e.closest('.task-card').dataset.id);
      var taskList = arrayOfTasks.find(function(task) {
       return idOfTaskList === task.id;
-     })
-  // var checkedButton = document.querySelector('.to-do-check');
+     });
   if(e.attributes.src.nodeValue == "images/checkbox.svg") {
     e.attributes.src.nodeValue = "images/checkbox-active.svg";
-
-  //switch it in your object
     taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
-
-     taskList.updateTask(arrayOfTasks);
-
-     } else {
-      e.attributes.src.nodeValue = "images/checkbox.svg";
-         //switch it in your object
+    taskList.updateTask(arrayOfTasks);
+  } else {
+     e.attributes.src.nodeValue = "images/checkbox.svg";
      taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
      taskList.updateTask(arrayOfTasks);
        }
   }
-  //   var check = e.target.parentElement.parentElement;
-  //   console.log(check);
-  //   var checkId = check.dataset.id;
-  //   var foundCheckedId = arrayOfTasks.find(function(arrayId){
-  //     return arrayId.id === parseInt(checkId);
-  //   });
-  // foundCheckedId.updateTask(arrayOfTasks);
-  // var toggleUrgentInput = e.target;
-  // if(foundUrgentId.urgent === true){
-  //   toggleUrgentInput.src = "images/checkbox-active.svg";
-  // } else {
-  //   toggleUrgentInput.src = "images/checkbox.svg";
-  //   };
+
+function deleteCard(e) {
+  var deleteButton = document.querySelector('.delete-btn');
+  var todoCard = e.target.parentElement.parentElement.parentElement;
+  if(e.target.className === 'delete-btn') {
+    console.log('Card Id', todoCard.dataset.id);
+    todoCard.remove();
+  }
+  var idOfTaskList = parseInt(todoCard.dataset.id);
+  
+  console.log('Id of card', idOfTaskList);
+  var compareArray = arrayOfTasks.filter(function(taskCard) {
+    console.log('Id of array card', taskCard.id);
+    if(taskCard.id === idOfTaskList){
+      console.log('card chosen', taskCard);
+      return taskCard;
+    }
+  });
+  compareArray[0].deleteFromStorage(idOfTaskList);
+}
+
+
+
 
 
 

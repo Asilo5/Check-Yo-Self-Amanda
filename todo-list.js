@@ -3,7 +3,7 @@ class toDoList {
       this.id = id;
       this.title = title;
       this.tasks = tasks || [];
-      this.urgent = urgent || false;
+      this.urgent = urgent || false; 
 	}
 
 	saveToStorage(taskArray) {
@@ -11,8 +11,12 @@ class toDoList {
     	localStorage.setItem('tasks', stringifiedTasks);
 	}
 
-	deleteFromStorage() {
-
+	deleteFromStorage(idOfCard) {
+      
+      var returnNewArray = arrayOfTasks.filter(function(taskCard) {
+        return taskCard.id != idOfCard;
+      })
+      this.saveToStorage(returnNewArray);
 	}
 
 	updateToDo(array) {
@@ -23,6 +27,7 @@ class toDoList {
 
 	updateTask(array) {
        // Update tasks content and if it has been completed
+
         this.saveToStorage(array);
 	}
 }
