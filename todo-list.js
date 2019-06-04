@@ -21,8 +21,8 @@ class toDoList {
 		this.saveToStorage(array);
 	}
 
-	updateTask() {
+	updateTask(array) {
        // Update tasks content and if it has been completed
-
+        this.saveToStorage(array);
 	}
 }

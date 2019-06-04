@@ -11,16 +11,22 @@ var windowLoadMsg = document.querySelector('.first-page-text');
 var bulletPointsContainer = document.querySelector('.pre-todos-to-print');
 var listSideContainer = document.querySelector('.display-pre-todos');
 var ulSideContainer = document.querySelector('.pre-todos-to-print');
+var cardShown = ''
 var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-window.addEventListener('load', newTasksArray);
-window.addEventListener('load', loadTasksMessage);
+// window.addEventListener('load', newTasksArray);
+// window.addEventListener('load', loadTasksMessage);
+newTasksArray();
+loadTasksMessage();
+cardShown = document.querySelector('.task-card');
+
 makeTaskBtn.addEventListener('click', saveTasksInfo);
-// toDoSection.addEventListener('click', toggleUrgent);
+toDoSection.addEventListener('click', toggleUrgent);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
 ulSideContainer.addEventListener('click', delteDisplayedTask);
+cardShown.addEventListener('click', checkedItems);
 
 
 function saveTasksInfo(e) { 
@@ -29,32 +35,52 @@ function saveTasksInfo(e) {
   arrayOfTasks.push(savedTasks);
   savedTasks.saveToStorage(arrayOfTasks);
   printTasksToCards(savedTasks);
+  // sideTasks(savedTasks);
   clearAllTheInputs();
   loadTasksMessage();
 };
 
 function newTasksArray() {
+  console.log("Loaded")
   arrayOfTasks = arrayOfTasks.map(function(oldTasks) {
     var newTasks = new toDoList(oldTasks.id, oldTasks.title, oldTasks.tasks, oldTasks.urgent);
     printTasksToCards(newTasks);
+    // sideTasks(newTasks);
     return newTasks;
   });
 };
 
+// function sideTasks(task) {
+//   var sideTasks = '';
+//   for(var i = 0; i < task.tasks.length; i++) {
+//   sideTasks += `<section class="to-do-check">
+//             <img src="images/checkbox.svg" class="check-task">
+//             <p class="task-printed" contenteditable = 'true'>${task.tasks[i]}</p>
+//           </section>`
+//         };
+// }
+
 function printTasksToCards(task) {
+   
+
   var sideTasks = '';
   for(var i = 0; i < task.tasks.length; i++) {
+        if(task.tasks[i].isChecked === true) {
+      checkedSrc = "images/checkbox-active.svg";
+    } else {
+      checkedSrc = "images/checkbox.svg";
+    }
   sideTasks += `<section class="to-do-check">
-            <img src="images/checkbox.svg" class="check-task">
-            <p class="task-printed" contenteditable = 'true'>${task.tasks[i]}</p>
+            <input type="image" src="${checkedSrc}" class="check-task" id="${i}" onclick="checkedItems(this)">
+            <p class="task-printed" contenteditable = 'true'>${task.tasks[i].text}</p>
           </section>`
         };
 
-    // if(task.urgent === true){
-    //   toggleUrgentInput.src = "images/urgent-active.svg";
-    // } else {
-    //   toggleUrgentInput.src = "images/urgent.svg";
-    // };
+    if(task.urgent === true) {
+      urgentSrc = "images/urgent-active.svg";
+    } else {
+      urgentSrc = "images/urgent.svg";
+    };
 
   var cardSection = 
   `<section class="task-card" data-id=${task.id}>
@@ -62,7 +88,7 @@ function printTasksToCards(task) {
           ${sideTasks}
           <section class="img-buttons">
             <div class="urgent">
-              <input type="image" src="images/urgent.svg" class="urgent-btn" alt="Thunder urgent button">
+              <input type="image" src="${urgentSrc}" class="urgent-btn" alt="Thunder urgent button">
               <p>URGENT</p>
            </div>
            <div class="delete">
@@ -122,44 +148,81 @@ function delteDisplayedTask(e) {
 }
 
 function loopSideTasks() {
+
   var asideLi = document.querySelectorAll('.printed-lists');
   var asideLiAsArray = Array.from(asideLi);
   var newAsideLi = asideLiAsArray.map(function(element){
-    return element.innerText
+    obj = {
+      text: element.innerText,
+      isChecked: false
+    }
+    return obj;
   });
    return newAsideLi;
 }
 
-// function toggleUrgent(e) {
-//   var urgentInput = document.querySelector('.urgent-btn');
+function toggleUrgent(e) {
+  var urgentInput = document.querySelector('.urgent-btn');
+  if(e.target.className === 'urgent-btn') {
+    var urgent = e.target.parentElement.parentElement.parentElement;
+    var urgentId = urgent.dataset.id;
+    var foundUrgentId = arrayOfTasks.find(function(arrayId){
+      return arrayId.id === parseInt(urgentId);
+    });
+  foundUrgentId.updateToDo(arrayOfTasks);
+  var toggleUrgentInput = e.target;
+  if(foundUrgentId.urgent === true){
+    toggleUrgentInput.src = "images/urgent-active.svg";
+    urgent.classList.add('task-card-urgent');
+  } else {
+    toggleUrgentInput.src = "images/urgent.svg";
+    urgent.classList.remove('task-card-urgent');
+    };
+  }
+}
 
-//   if(e.target.className === 'urgent-btn') {
-//     var urgent = e.target.parentElement.parentElement.parentElement;
-//     console.log('urgent parent', urgent);
-//     var urgentId = urgent.dataset.id;
-//     console.log('the ID of parent', urgentId);
+function checkedItems(e) {
+  
 
-//     var foundUrgentId = arrayOfTasks.find(function(arrayId){
-//       console.log('the arrayId', arrayId.id);
-//       console.log('the inside urgentId', parseInt(urgentId));
-//       return arrayId.id === parseInt(urgentId);
-//     });
+     var indexOfTask = parseInt(e.id);
 
-//     console.log('foundUrgentId --->', foundUrgentId);
+     var idOfTaskList = parseInt(e.closest('.task-card').dataset.id);
+     var taskList = arrayOfTasks.find(function(task) {
+      return idOfTaskList === task.id;
+     })
+  // var checkedButton = document.querySelector('.to-do-check');
+  if(e.attributes.src.nodeValue == "images/checkbox.svg") {
+    e.attributes.src.nodeValue = "images/checkbox-active.svg";
 
-//     foundUrgentId.updateToDo(arrayOfTasks);
+  //switch it in your object
+    taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
 
-//     var toggleUrgentInput = e.target;
+     taskList.updateTask(arrayOfTasks);
 
-//     // console.log(toggleUrgent);
-    
-//     if(foundUrgentId.urgent === true){
-//       toggleUrgentInput.src = "images/urgent-active.svg";
-//     } else {
-//       toggleUrgentInput.src = "images/urgent.svg";
-//     };
-//   }
-// }
+     } else {
+      e.attributes.src.nodeValue = "images/checkbox.svg";
+         //switch it in your object
+     taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
+     taskList.updateTask(arrayOfTasks);
+       }
+  }
+  //   var check = e.target.parentElement.parentElement;
+  //   console.log(check);
+  //   var checkId = check.dataset.id;
+  //   var foundCheckedId = arrayOfTasks.find(function(arrayId){
+  //     return arrayId.id === parseInt(checkId);
+  //   });
+  // foundCheckedId.updateTask(arrayOfTasks);
+  // var toggleUrgentInput = e.target;
+  // if(foundUrgentId.urgent === true){
+  //   toggleUrgentInput.src = "images/checkbox-active.svg";
+  // } else {
+  //   toggleUrgentInput.src = "images/checkbox.svg";
+  //   };
+
+
+
+
 
 
 
