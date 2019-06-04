@@ -163,10 +163,16 @@ button:disabled,
  /* width: 50%;*/
 }
 
+.task-card-urgent {
+  background-color: #ffe89d;
+  border: 2px solid #ffc30c;
+}
+
 h2 {
   border-bottom: 2px solid #c7d3d8;
   padding: 10px;
 }
+
 
 .to-do-check {
   padding: 19px;
@@ -178,8 +184,10 @@ h2 {
   font-size: 1.2em;
 }
 
-.to-do-check > img{
-  height: 21px;
+.to-do-check > input{
+  border: none;
+  height: 26px;
+  margin: 0;
 }
 
 .urgent > input,
