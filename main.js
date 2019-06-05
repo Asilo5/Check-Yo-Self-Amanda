@@ -18,11 +18,11 @@ var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 // window.addEventListener('load', loadTasksMessage);
 newTasksArray();
 loadTasksMessage();
-cardShown = document.querySelector('.task-card');
+// cardShown = document.querySelector('.task-card');
 
 makeTaskBtn.addEventListener('click', saveTasksInfo);
 toDoSection.addEventListener('click', toggleUrgent);
-toDoSection.addEventListener('click', deleteCard);
+// toDoSection.addEventListener('click', deleteCard);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
@@ -64,12 +64,14 @@ function printTasksToCards(task) {
 
     if(task.urgent === true) {
       urgentSrc = "images/urgent-active.svg";
+      var nothing = "task-card-urgent"
     } else {
       urgentSrc = "images/urgent.svg";
+      nothing = ""
     };
 
   var cardSection = 
-  `<section class="task-card" data-id=${task.id}>
+  `<section class="task-card ${nothing}" data-id=${task.id}>
           <h2 class="title-printed" contenteditable = 'true'>${task.title}</h2>
           ${sideTasks}
           <section class="img-buttons">
@@ -78,7 +80,7 @@ function printTasksToCards(task) {
               <p>URGENT</p>
            </div>
            <div class="delete">
-              <input type="image" src="images/delete.svg" class="delete-btn" alt="Delete X button">
+              <input type="image" src="images/delete.svg" class="delete-btn" id="delete-button-${task.id}" onclick="deleteCard(this)" alt="Delete X button" disabled>
               <p>DELETE</p>
           </div>
           </section>
@@ -174,33 +176,44 @@ function checkedItems(e) {
      });
   if(e.attributes.src.nodeValue == "images/checkbox.svg") {
     e.attributes.src.nodeValue = "images/checkbox-active.svg";
-    taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
+    taskList.tasks[indexOfTask].isChecked = !taskList.tasks[indexOfTask].isChecked;
     taskList.updateTask(arrayOfTasks);
   } else {
      e.attributes.src.nodeValue = "images/checkbox.svg";
-     taskList.tasks[indexOfTask].isChecked = !taskList.tasks.isChecked;
+     taskList.tasks[indexOfTask].isChecked = !taskList.tasks[indexOfTask].isChecked;
      taskList.updateTask(arrayOfTasks);
        }
+    enableDeleteButton(taskList);
   }
 
+function enableDeleteButton(taskList) {
+  var isComplete = taskList.tasks.every(function(task) {
+    return task.isChecked === true;
+  });
+  if (isComplete === true) {
+    document.querySelector(`#delete-button-${taskList.id}`).disabled = false;
+    document.querySelector(`#delete-button-${taskList.id}`).classList.remove('disabled');
+  } else {
+    document.querySelector(`#delete-button-${taskList.id}`).disabled = true;
+    document.querySelector(`#delete-button-${taskList.id}`).classList.add('disabled');
+  }
+}
+
 function deleteCard(e) {
-  var deleteButton = document.querySelector('.delete-btn');
-  var todoCard = e.target.parentElement.parentElement.parentElement;
-  if(e.target.className === 'delete-btn') {
+    var todoCard = e.parentElement.parentElement.parentElement;
+    var idOfTaskList = parseInt(todoCard.dataset.id);
+
+    var taskList = arrayOfTasks.find(function(taskCard) {
+    return taskCard.id === idOfTaskList
+    });
+
+  if(e.className === 'delete-btn') {
     console.log('Card Id', todoCard.dataset.id);
     todoCard.remove();
+
+    taskList.deleteFromStorage(arrayOfTasks, idOfTaskList);
+
   }
-  var idOfTaskList = parseInt(todoCard.dataset.id);
-  
-  console.log('Id of card', idOfTaskList);
-  var compareArray = arrayOfTasks.filter(function(taskCard) {
-    console.log('Id of array card', taskCard.id);
-    if(taskCard.id === idOfTaskList){
-      console.log('card chosen', taskCard);
-      return taskCard;
-    }
-  });
-  compareArray[0].deleteFromStorage(idOfTaskList);
 }
 
 
