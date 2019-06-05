@@ -13,7 +13,8 @@ Given Comp:
 ![Comp-Mobile](https://user-images.githubusercontent.com/19739235/58915570-898b9a00-86de-11e9-9fd1-6324c2f030a2.jpg)
 
 My Project:
- ![our screen shot]()
+ ![Uploading Screenshot 2019-06-04 at 22.48.54.png…]()
+
 
 
 ## Emphasis of the Project
