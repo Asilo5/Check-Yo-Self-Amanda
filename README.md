@@ -3,28 +3,22 @@
 ## Description
 
 Project is a todo list for users. User is able to store their todos in local storage, delete them, or mark them as urgent.
+This Project is the fourth and final Project for the Mod-1 course at Turing School of Software and Design.
 
 Created by:
 - Amanda Sierra:[GitHub](https://github.com/Asilo5),
+
                 [LinkedIn](https://www.linkedin.com/in/amanda-sierra-lopez-developer/)
-
-## Setup
-
-Simply start by cloning the repo:
-
-```bash
-git clone [remote-address]
-```
-This project does not have run off a local server so that's all for instillation just open the index file in the browser to play the game!!
 
 
 ## Screenshots
-
-Our Project:
- ![our screen shot]()
-
 Given Comp:
- ![second screen shot](<img width="717" alt="Screenshot 2019-05-31 at 11 02 25" src="https://user-images.githubusercontent.com/24511130/58722130-e829de80-8393-11e9-9850-ad3b6038f861.png">)
+ ![Comp-Desktop](https://user-images.githubusercontent.com/19739235/58907871-5dffb400-86cc-11e9-8231-e9d919f6cb98.jpg)
+
+![Comp-Mobile](https://user-images.githubusercontent.com/19739235/58915570-898b9a00-86de-11e9-9fd1-6324c2f030a2.jpg)
+
+My Project:
+ ![our screen shot]()
 
 
 ## Emphasis of the Project
