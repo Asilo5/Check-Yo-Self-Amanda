@@ -18,17 +18,14 @@ var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 // window.addEventListener('load', loadTasksMessage);
 newTasksArray();
 loadTasksMessage();
-// cardShown = document.querySelector('.task-card');
 
 makeTaskBtn.addEventListener('click', saveTasksInfo);
 toDoSection.addEventListener('click', toggleUrgent);
-// toDoSection.addEventListener('click', deleteCard);
 taskInput.addEventListener('keyup', disableBtnToggle);
 clearAllBtn.addEventListener('click', clearAllTheInputs);
 addBtn.addEventListener('click', asideBulletPoints);
 ulSideContainer.addEventListener('click', delteDisplayedTask);
-// cardShown.addEventListener('click', checkedItems);
-
+searchInput.addEventListener('keyup', filterSearchTerms);
 
 function saveTasksInfo(e) { 
   e.preventDefault();
@@ -117,7 +114,8 @@ function clearAllTheInputs() {
   taskInput.value = '';
 }
 
-function asideBulletPoints() {
+function asideBulletPoints(e) {
+  e.preventDefault();
   bulletPointsContainer.insertAdjacentHTML('beforeend', 
     `<li class='printed-lists'>${taskInput.value}</li>`);
   taskInput.value = '';
@@ -208,13 +206,23 @@ function deleteCard(e) {
     });
 
   if(e.className === 'delete-btn') {
-    console.log('Card Id', todoCard.dataset.id);
     todoCard.remove();
 
     taskList.deleteFromStorage(arrayOfTasks, idOfTaskList);
 
   }
 }
+
+function filterSearchTerms(e) {
+    var searchText = e.target.value.toUpperCase();
+    var results = arrayOfTasks.filter(function(task){
+        return task.title.toUpperCase().includes(searchText);
+    })
+    document.querySelector(".to-do-list").innerHTML = '';
+    results.forEach(function(task){
+      printTasksToCards(task);
+    });
+};
 
 
 
