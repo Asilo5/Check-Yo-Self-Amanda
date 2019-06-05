@@ -11,12 +11,14 @@ class toDoList {
     	localStorage.setItem('tasks', stringifiedTasks);
 	}
 
-	deleteFromStorage(idOfCard) {
+	deleteFromStorage(arrayOfTasks, idOfTask) {
+      var index = arrayOfTasks.find(function(task) {
+      	return task.id == idOfTask;
+      });
+
+      arrayOfTasks.splice(index, 1)
       
-      var returnNewArray = arrayOfTasks.filter(function(taskCard) {
-        return taskCard.id != idOfCard;
-      })
-      this.saveToStorage(returnNewArray);
+      this.saveToStorage(arrayOfTasks);
 	}
 
 	updateToDo(array) {

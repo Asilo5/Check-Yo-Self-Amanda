@@ -80,7 +80,7 @@ function printTasksToCards(task) {
               <p>URGENT</p>
            </div>
            <div class="delete">
-              <input type="image" onclick="deleteCard(this)" src="images/delete.svg" class="delete-btn" alt="Delete X button">
+              <input type="image" src="images/delete.svg" class="delete-btn" id="delete-button-${task.id}" onclick="deleteCard(this)" alt="Delete X button" disabled>
               <p>DELETE</p>
           </div>
           </section>
@@ -183,26 +183,37 @@ function checkedItems(e) {
      taskList.tasks[indexOfTask].isChecked = !taskList.tasks[indexOfTask].isChecked;
      taskList.updateTask(arrayOfTasks);
        }
+    enableDeleteButton(taskList);
   }
 
-function enableDeleteButton() {
-  
+function enableDeleteButton(taskList) {
+  var isComplete = taskList.tasks.every(function(task) {
+    return task.isChecked === true;
+  });
+  if (isComplete === true) {
+    document.querySelector(`#delete-button-${taskList.id}`).disabled = false;
+    document.querySelector(`#delete-button-${taskList.id}`).classList.remove('disabled');
+  } else {
+    document.querySelector(`#delete-button-${taskList.id}`).disabled = true;
+    document.querySelector(`#delete-button-${taskList.id}`).classList.add('disabled');
+  }
 }
 
 function deleteCard(e) {
-  var deleteButton = document.querySelector('.delete-btn');
     var todoCard = e.parentElement.parentElement.parentElement;
+    var idOfTaskList = parseInt(todoCard.dataset.id);
+
+    var taskList = arrayOfTasks.find(function(taskCard) {
+    return taskCard.id === idOfTaskList
+    });
+
   if(e.className === 'delete-btn') {
     console.log('Card Id', todoCard.dataset.id);
     todoCard.remove();
+
+    taskList.deleteFromStorage(arrayOfTasks, idOfTaskList);
+
   }
-  var idOfTaskList = parseInt(todoCard.dataset.id);
-  var compareArray = arrayOfTasks.filter(function(taskCard) {
-    if(taskCard.id === idOfTaskList){
-      return taskCard;
-    }
-  });
-  compareArray[0].deleteFromStorage(idOfTaskList);
 }
 
 
