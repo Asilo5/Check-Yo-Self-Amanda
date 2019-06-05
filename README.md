@@ -5,11 +5,6 @@
 Project is a todo list for users. User is able to store their todos in local storage, delete them, or mark them as urgent.
 This Project is the fourth and final Project for the Mod-1 course at Turing School of Software and Design.
 
-Created by:
-- Amanda Sierra:[GitHub](https://github.com/Asilo5),
-
-                [LinkedIn](https://www.linkedin.com/in/amanda-sierra-lopez-developer/)
-
 
 ## Screenshots
 Given Comp:
