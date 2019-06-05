@@ -12,6 +12,7 @@ class toDoList {
 	}
 
 	deleteFromStorage(arrayOfTasks, idOfTask) {
+		
       var index = arrayOfTasks.find(function(task) {
       	return task.id == idOfTask;
       });
