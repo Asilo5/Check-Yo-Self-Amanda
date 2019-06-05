@@ -11,7 +11,6 @@ var windowLoadMsg = document.querySelector('.first-page-text');
 var bulletPointsContainer = document.querySelector('.pre-todos-to-print');
 var listSideContainer = document.querySelector('.display-pre-todos');
 var ulSideContainer = document.querySelector('.pre-todos-to-print');
-var cardShown = ''
 var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 window.addEventListener('load', newTasksArray);
@@ -195,7 +194,6 @@ function enableDeleteButton(taskList) {
 }
 
 function deleteCard(e) {
-
     var todoCard = e.parentElement.parentElement.parentElement;
     var idOfTaskList = parseInt(todoCard.dataset.id);
     var taskList = arrayOfTasks.find(function(taskCard) {
