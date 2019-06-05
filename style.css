@@ -170,6 +170,8 @@ button:disabled,
 
 h2 {
   border-bottom: 2px solid #c7d3d8;
+  font-size: 24px;
+  font-weight: 600;
   padding: 10px;
 }
 
