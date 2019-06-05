@@ -57,14 +57,14 @@ function printTasksToCards(task) {
 
     if(task.urgent === true) {
       urgentSrc = "images/urgent-active.svg";
-      var nothing = "task-card-urgent"
+      var urgentInput = "task-card-urgent"
     } else {
       urgentSrc = "images/urgent.svg";
-      nothing = ""
+      urgentInput = ""
     };
 
   var cardSection = 
-  `<section class="task-card ${nothing}" data-id=${task.id}>
+  `<section class="task-card ${urgentInput}" data-id=${task.id}>
           <h2 class="title-printed" contenteditable = 'true'>${task.title}</h2>
           ${sideTasks}
           <section class="img-buttons">
