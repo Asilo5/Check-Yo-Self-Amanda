@@ -14,11 +14,8 @@ var ulSideContainer = document.querySelector('.pre-todos-to-print');
 var cardShown = ''
 var arrayOfTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-// window.addEventListener('load', newTasksArray);
-// window.addEventListener('load', loadTasksMessage);
-newTasksArray();
-loadTasksMessage();
-
+window.addEventListener('load', newTasksArray);
+window.addEventListener('load', loadTasksMessage);
 makeTaskBtn.addEventListener('click', saveTasksInfo);
 toDoSection.addEventListener('click', toggleUrgent);
 taskInput.addEventListener('keyup', disableBtnToggle);
@@ -198,18 +195,16 @@ function enableDeleteButton(taskList) {
 }
 
 function deleteCard(e) {
+
     var todoCard = e.parentElement.parentElement.parentElement;
     var idOfTaskList = parseInt(todoCard.dataset.id);
-
     var taskList = arrayOfTasks.find(function(taskCard) {
-    return taskCard.id === idOfTaskList
+    return taskCard.id == idOfTaskList;
     });
-
+    console.log(taskList);
   if(e.className === 'delete-btn') {
     todoCard.remove();
-
     taskList.deleteFromStorage(arrayOfTasks, idOfTaskList);
-
   }
 }
 
